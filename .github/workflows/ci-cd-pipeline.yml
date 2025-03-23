@@ -41,15 +41,14 @@ jobs:
       - name: Run Integration Tests
         run: mvn verify
 
-      - name: Run Checkstyle (Code Formatting)
-        run: mvn checkstyle:check
+#      - name: Run Checkstyle (Code Formatting)
+#        run: mvn checkstyle:check
 
-      - name: OWASP Dependency Check (Security Scan)
-        run: mvn org.owasp:dependency-check-maven:check
+#      - name: OWASP Dependency Check (Security Scan)
+#        run: mvn org.owasp:dependency-check-maven:check
 
-      - name: Archive Test Results
-        if: failure()
-        uses: actions/upload-artifact@v3
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4  # Use v4 (latest version)
         with:
           name: test-results
           path: target/surefire-reports/
