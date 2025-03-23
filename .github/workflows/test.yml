@@ -1,0 +1,22 @@
+name: Run Tests Before Merge
+
+on:
+  pull_request:  # Runs on every PR
+    branches:
+      - main  # Change this to your default branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Java (Example)
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Run Tests
+        run: mvn test  # Replace with your test command
