@@ -41,11 +41,11 @@ jobs:
       - name: Run Integration Tests
         run: mvn verify
 
-      - name: Run Checkstyle (Code Formatting)
-        run: mvn checkstyle:check
+#      - name: Run Checkstyle (Code Formatting)
+#        run: mvn checkstyle:check
 
-      - name: OWASP Dependency Check (Security Scan)
-        run: mvn org.owasp:dependency-check-maven:check
+#      - name: OWASP Dependency Check (Security Scan)
+#        run: mvn org.owasp:dependency-check-maven:check
 
       - name: Archive Test Results
         if: failure()

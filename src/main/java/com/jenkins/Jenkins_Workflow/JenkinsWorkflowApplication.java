@@ -22,8 +22,6 @@ public class JenkinsWorkflowApplication {
 ✅ Blocks Merge if tests fail
 
 	* */
-	public void Test(){
-		System.out.println("CI/CD Pipeline Example");
-	}
+	public void testSomething(){System.out.println("CI/CD Pipeline Example");}
 
 }
