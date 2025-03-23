@@ -11,7 +11,7 @@ public class JenkinsWorkflowApplication {
 	}
 
 	public void Test(){
-		System.out.println("Hello Mr");
+		System.out.println("CI/CD Pipeline Example");
 	}
 
 }
