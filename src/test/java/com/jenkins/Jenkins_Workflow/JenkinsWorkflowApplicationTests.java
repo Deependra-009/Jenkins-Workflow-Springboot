@@ -7,7 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 class JenkinsWorkflowApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void contextLoads() throws InterruptedException{
+
+		Thread.sleep(10000);
+
 	}
 
 }

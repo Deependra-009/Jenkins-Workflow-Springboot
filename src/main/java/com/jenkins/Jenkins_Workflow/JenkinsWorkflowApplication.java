@@ -10,4 +10,8 @@ public class JenkinsWorkflowApplication {
 		SpringApplication.run(JenkinsWorkflowApplication.class, args);
 	}
 
+	public void Test(){
+		System.out.println("CI/CD Pipeline Example");
+	}
+
 }
