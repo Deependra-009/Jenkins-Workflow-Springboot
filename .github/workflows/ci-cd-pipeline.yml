@@ -1,0 +1,63 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set Up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'  # Use AdoptOpenJDK (Temurin)
+          java-version: '17'  # Change as per your project
+
+      - name: Cache Maven Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: maven-
+
+      - name: Build Project
+        run: mvn clean package -DskipTests
+
+      - name: Run Unit Tests
+        run: mvn test
+
+      - name: Run Integration Tests
+        run: mvn verify
+
+      - name: Run Checkstyle (Code Formatting)
+        run: mvn checkstyle:check
+
+      - name: OWASP Dependency Check (Security Scan)
+        run: mvn org.owasp:dependency-check-maven:check
+
+      - name: Archive Test Results
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: target/surefire-reports/
+
+  pre-merge:
+    name: Block Merge Until Checks Pass
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Ensure All Checks Passed
+        run: echo "All tests passed! Ready for merge."
